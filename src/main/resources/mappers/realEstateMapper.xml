@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.quiz.lesson03.mapper.RealEstateMapper">
+ 
+ <!--  3강 1-1번문제  -->
+ 	<select id="selectRealEstatebyId" parameterType="int" resultType="com.quiz.lesson03.domain.RealEstate">
+ 		SELECT
+ 			`id`
+ 			, `realtorId`
+ 			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `rentPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			`id` = #{id}
+ 	</select>
+ 	
+ 	<!-- 3강 1-2문제 -->
+ 	<select id="selectRealEstateListByRentPrice" parameterType="int" resultType="com.quiz.lesson03.domain.RealEstate">
+ 		SELECT
+ 			`id`
+ 			, `realtorId`
+ 			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `rentPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			<![CDATA[
+ 			`rentPrice` < #{rentPrice}
+ 			]]>
+ 	</select>
+ 	
+ 	<!--  3강 1-3문제 -->
+ 	<select id="selectRealEstateListByArea" parameterType="int" resultType="com.quiz.lesson03.domain.RealEstate">
+ 		SELECT
+ 			`id`
+ 			, `realtorId`
+ 			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `rentPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`real_estate`
+ 		WHERE
+ 			<![CDATA[
+ 			`area` <= #{area} & `price` >= #{price}
+ 			]]>
+ 	</select>
+ </mapper>
