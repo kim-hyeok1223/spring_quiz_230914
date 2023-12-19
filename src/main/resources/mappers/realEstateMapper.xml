@@ -44,7 +44,7 @@
  	</select>
  	
  	<!--  3강 1-3문제 -->
- 	<select id="selectRealEstateListByArea" parameterType="int" resultType="com.quiz.lesson03.domain.RealEstate">
+ 	<select id="selectRealEstateListByAreaPrice" parameterType="map" resultType="com.quiz.lesson03.domain.RealEstate">
  		SELECT
  			`id`
  			, `realtorId`
@@ -59,7 +59,55 @@
  			`real_estate`
  		WHERE
  			<![CDATA[
- 			`area` <= #{area} & `price` >= #{price}
+ 			`type`='매매' AND `area` >= #{area} AND `price` <= #{price}
  			]]>
  	</select>
+ 	
+ 	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.domain.RealEstate">
+ 		INSERT INTO `real_estate`
+ 		(
+		`realtorId`
+			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	
+ 	<insert id="insertRealEstateByField" parameterType="map">
+ 	INSERT INTO `real_estate`
+ 		(
+		`realtorId`
+			, `address`
+ 			, `area`
+ 			, `type`
+ 			, `price`
+ 			, `rentPrice`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 			, #{rentPrice}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
  </mapper>
