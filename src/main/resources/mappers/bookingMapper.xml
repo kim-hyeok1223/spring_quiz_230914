@@ -5,7 +5,8 @@
 <mapper namespace="com.quiz.booking.mapper.BookingMapper">
 	<select id="selectBookingList" resultType="com.quiz.booking.domain.Booking" >
 	SELECT
-		`name`
+		`id`
+		, `name`
 		, `headcount`
 		, `day`
 		, `date`
@@ -13,5 +14,53 @@
 		, `state`
 	FROM
 		`booking`
+	</select>
+	
+	<delete id="deleteBookingById" parameterType="int">
+		DELETE
+		FROM
+			`booking`
+		WHERE
+			`id` = #{id}
+	</delete>
+	
+	<insert id="insertBookingList" parameterType="map">
+		INSERT INTO `booking`
+		(
+			`name`
+			, `headcount`
+			, `day`
+			, `date`
+			, `phoneNumber`
+			, `state`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{name}
+			, #{headcount}
+			, #{day}
+			, #{date}
+			, #{phoneNumber}
+			, '대기중'
+			, NOW()
+			, NOW()
+		)
+		
+	</insert>
+	
+	<select id="selectBookingListByPhoneNumber" resultType="com.quiz.booking.domain.Booking">
+	SELECT
+		`name`
+		, `date`
+		, `day`
+		, `headcount`
+		, `state`
+	FROM
+		`booking`
+	WHERE
+		`phoneNumber` = #{phoneNumber}
+	
 	</select>
 </mapper>

@@ -2,12 +2,13 @@ package com.quiz.lesson03.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.quiz.lesson03.domain.RealEstate;
 
-@Repository
+@Mapper
 public interface RealEstateMapper {
 	public RealEstate selectRealEstatebyId(int id);
 
